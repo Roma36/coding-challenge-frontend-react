@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "lint": "tslint 'src/**/*.{ts,tsx}'"
   },
   "browserslist": [
     ">0.2%",
@@ -34,8 +34,14 @@
     "tslint-config-standard": "^8.0.1",
     "tslint-react": "^3.6.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "{src,test}/**/*.ts*": [
+      "tslint",
       "prettier --write",
       "git add"
     ]
