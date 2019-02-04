@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Index from './pages/index/Index';
 import Details from './pages/details/Details';
+import NotFound from './pages/not-found/NotFound';
 
 const AppWrapper = styled.div``;
 
@@ -51,7 +52,8 @@ class App extends Component {
           </Header>
 
           <Route exact path="/" component={Index} />
-          <Route path="/details/:id" component={Details} />
+          <Route path="/case/:id" component={Details} />
+          <Route component={NotFound} />
         </AppWrapper>
       </Router>
     );
