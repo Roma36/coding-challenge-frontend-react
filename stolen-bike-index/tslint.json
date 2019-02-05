@@ -13,7 +13,7 @@
       }
     ],
     "jsx-boolean-value": false,
-    "interface-name": false,
+    "interface-name": false
   },
   "rulesDirectory": []
 }

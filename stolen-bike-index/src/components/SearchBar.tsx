@@ -41,12 +41,14 @@ function SearchBar({ onSearch, placeholder = '' }: SearchBarProps) {
     if (event.key === 'Enter') {
       onSearch(inputValue);
     }
-  }
+  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value);
+  const handleButtonClick = () => onSearch(inputValue);
 
   return (
     <SearchBarWrapper>
-      <Input placeholder={placeholder} onChange={e => setInputValue(e.target.value)} onKeyPress={handleKeyPress}/>
-      <SearchButton onClick={() => onSearch(inputValue)}>Find cases</SearchButton>
+      <Input placeholder={placeholder} onChange={handleInputChange} onKeyPress={handleKeyPress} />
+      <SearchButton onClick={handleButtonClick}>Find cases</SearchButton>
     </SearchBarWrapper>
   );
 }

@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/SearchBar';
+import { connect } from 'react-redux';
 
-export default class Index extends Component {
-
-  executeSearch = (str: string) => {
-    return console.log(str);
-  }
+class Index extends Component {
+  private executeSearch = (str: string) => {
+    //
+  };
 
   render() {
     return (
       <React.Fragment>
-        <SearchBar
-          onSearch={this.executeSearch}
-          placeholder="Search case descriptions"
-        />
+        <SearchBar onSearch={this.executeSearch} placeholder="Search case descriptions" />
       </React.Fragment>
-    )
+    );
   }
 }
+
+export default connect(
+  null,
+  {}
+)(Index);
