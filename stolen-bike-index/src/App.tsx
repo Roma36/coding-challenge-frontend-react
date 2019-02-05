@@ -36,6 +36,10 @@ const Heading = styled.div`
   opacity: 0.9;
 `;
 
+const ContentWrapper = styled.div`
+  padding: 2%;
+`
+
 class App extends Component {
   render() {
     return (
@@ -51,11 +55,13 @@ class App extends Component {
             </HeadingWrapper>
           </Header>
 
-        <Switch>
-          <Route exact path="/" component={Index} />
-          <Route path="/case/:id" component={Details} />
-          <Route component={NotFound} />
-        </Switch>
+        <ContentWrapper>
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route path="/case/:id" component={Details} />
+            <Route component={NotFound} />
+          </Switch>
+        </ContentWrapper>
         </AppWrapper>
       </Router>
     );

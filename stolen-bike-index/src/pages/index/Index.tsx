@@ -9,12 +9,12 @@ export default class Index extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <SearchBar
           onSearch={this.executeSearch}
           placeholder="Search case descriptions"
         />
-      </div>
+      </React.Fragment>
     )
   }
 }
