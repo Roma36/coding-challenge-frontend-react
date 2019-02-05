@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Index from './pages/index/Index';
 import Details from './pages/details/Details';
 import NotFound from './pages/not-found/NotFound';
@@ -51,9 +51,11 @@ class App extends Component {
             </HeadingWrapper>
           </Header>
 
+        <Switch>
           <Route exact path="/" component={Index} />
           <Route path="/case/:id" component={Details} />
           <Route component={NotFound} />
+        </Switch>
         </AppWrapper>
       </Router>
     );

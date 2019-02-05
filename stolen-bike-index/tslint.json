@@ -12,7 +12,8 @@
         "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "interface-name": false,
   },
   "rulesDirectory": []
 }
