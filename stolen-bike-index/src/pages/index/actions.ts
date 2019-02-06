@@ -30,8 +30,13 @@ export type LoadIndexAction =
   | { type: 'LOAD_INDEX_SUCCESS'; incidents: IncidentData[] }
   | { type: 'LOAD_INDEX_FAILURE'; error: string };
 
-// action creators
+export interface FilterIndexAction {
+  type: 'FILTER_INDEX';
+  filterBy: string;
+}
 
+// action creators
+// load actions
 export const loadIndex = () => {
   return (dispatch: Dispatch) => {
     dispatch(loadIndexRequest());
@@ -58,4 +63,9 @@ export function loadIndexSuccess(incidents: IncidentData[]): LoadIndexAction {
 
 export function loadIndexFailure(error: string): LoadIndexAction {
   return { type: 'LOAD_INDEX_FAILURE', error };
+}
+
+// filter actions
+export function filterIndex(filterBy: string): FilterIndexAction {
+  return { type: 'FILTER_INDEX', filterBy };
 }

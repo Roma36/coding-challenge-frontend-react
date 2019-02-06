@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/SearchBar';
 import { connect } from 'react-redux';
-import { loadIndex, IncidentData } from './actions';
+import { loadIndex, IncidentData, filterIndex } from './actions';
 import styled from 'styled-components';
 import { getIncidents, getTotalCount, getLoading, getError } from './selectors';
 import { IState } from '../rootReducer';
@@ -19,6 +19,7 @@ const Search = styled(SearchBar)`
 
 interface IndexProps {
   loadIndex: () => void;
+  filterIndex: (title: string) => void;
   totalCount: number;
   incidents: IncidentData[];
   isLoading: boolean;
@@ -30,19 +31,24 @@ class Index extends Component<IndexProps> {
     this.props.loadIndex();
   }
 
-  private executeSearch = (str: string) => {
-    //
+  private searchIncidents = (str: string) => {
+    this.props.filterIndex(str);
   };
 
   render() {
     const { totalCount, incidents, isLoading, error } = this.props;
     return (
       <React.Fragment>
-        <Search onSearch={this.executeSearch} placeholder="Search case descriptions" />
+        <Search onSearch={this.searchIncidents} placeholder="Search case descriptions" />
+
         {Boolean(totalCount) && <TotalCount>total: {totalCount}</TotalCount>}
+
         {isLoading && 'Loading...'}
+
         {!error && !isLoading && incidents.length === 0 && 'No Results'}
-        {Boolean(error) && <Error>Ooops, something went wrong</Error>}
+
+        {Boolean(error) && <Error>{'Ooops, something went wrong'}</Error>}
+
         {incidents.map(incident => (
           <IncidentItem
             key={incident.id}
@@ -67,5 +73,5 @@ export default connect(
     totalCount: getTotalCount(state),
     error: getError(state),
   }),
-  { loadIndex }
+  { loadIndex, filterIndex }
 )(Index);

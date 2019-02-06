@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Props } from 'react';
 
-export default function Error({ children }: { children: any }) {
-  // [todo] fix typing
+export default function Error({ children }: Props<any>) {
   return <span style={{ color: 'red' }}>{children}</span>;
 }
