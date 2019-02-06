@@ -1,10 +1,15 @@
 import { combineReducers } from 'redux';
 
 // reducers
-import indexReducer from './index/reducer';
-import detailsReducer from './details/reducer';
+import index, { IndexState } from './index/reducer';
+import details from './details/reducer';
+
+export interface IState {
+  index: IndexState;
+  details: any;
+}
 
 export default combineReducers({
-  indexReducer,
-  detailsReducer
+  index,
+  details,
 });

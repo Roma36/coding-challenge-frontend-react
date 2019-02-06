@@ -1,13 +1,13 @@
-import { LoadIndexAction } from './actions';
+import { LoadIndexAction, IncidentData } from './actions';
 
-interface IndexState {
-  items: object[];
+export interface IndexState {
+  incidents: IncidentData[];
   isLoading: boolean;
   error: string;
 }
 
 const initialState: IndexState = {
-  items: [],
+  incidents: [],
   isLoading: false,
   error: '',
 };
@@ -15,9 +15,9 @@ const initialState: IndexState = {
 export function indexReducer(state = initialState, action: LoadIndexAction): IndexState {
   switch (action.type) {
     case 'LOAD_INDEX_REQUEST':
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, error: '' };
     case 'LOAD_INDEX_SUCCESS':
-      return { ...state, isLoading: false, items: action.items };
+      return { ...state, isLoading: false, incidents: action.incidents || [] };
     case 'LOAD_INDEX_FAILURE':
       return { ...state, isLoading: false, error: action.error };
     default:

@@ -37,8 +37,8 @@ const Heading = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding: 2%;
-`
+  padding: 2% 15% 2% 2%;
+`;
 
 class App extends Component {
   render() {
@@ -55,13 +55,13 @@ class App extends Component {
             </HeadingWrapper>
           </Header>
 
-        <ContentWrapper>
-          <Switch>
-            <Route exact path="/" component={Index} />
-            <Route path="/case/:id" component={Details} />
-            <Route component={NotFound} />
-          </Switch>
-        </ContentWrapper>
+          <ContentWrapper>
+            <Switch>
+              <Route exact path="/" component={Index} />
+              <Route path="/case/:id" component={Details} />
+              <Route component={NotFound} />
+            </Switch>
+          </ContentWrapper>
         </AppWrapper>
       </Router>
     );
