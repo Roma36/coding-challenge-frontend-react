@@ -2,6 +2,7 @@
   "name": "stolen-bike-index",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://roma36.github.io/coding-challenge-frontend-react",
   "dependencies": {
     "@types/jest": "23.3.13",
     "@types/node": "10.12.21",
@@ -29,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "tslint 'src/**/*.{ts,tsx}'"
+    "lint": "tslint 'src/**/*.{ts,tsx}'",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",

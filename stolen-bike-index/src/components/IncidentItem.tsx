@@ -54,7 +54,7 @@ function IncidentItem({ imageUrl, title, link, description, theftDate, reportDat
 
   return (
     <ItemWrapper>
-      <Picture alt="bike picture" src={imageUrl || '/favicon.ico'} />
+      <Picture alt="bike picture" src={imageUrl || 'favicon.ico'} />
       <InfoWrapper>
         <Link to={link}>{title}</Link>
         <Description>

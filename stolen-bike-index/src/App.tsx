@@ -8,7 +8,7 @@ import NotFound from './pages/not-found/NotFound';
 const AppWrapper = styled.div``;
 
 const Header = styled.header`
-  background: url(/img/illustration.png) center repeat;
+  background: url(img/illustration.png) center repeat;
   background-size: contain;
   height: 200px;
   display: flex;
@@ -43,10 +43,10 @@ const ContentWrapper = styled.div`
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <AppWrapper>
           <Header>
-            <Logo src="/img/police-logo.svg" />
+            <Logo src="img/police-logo.svg" />
             <HeadingWrapper>
               <Heading>
                 <h1>Police Department of Berlin</h1>
