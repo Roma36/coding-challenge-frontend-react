@@ -1,5 +1,5 @@
 import { getSearchText } from './selectors';
-import { IState } from './../rootReducer';
+import { IState, ThunkResult, ThunkDispatch } from './../rootReducer';
 import config from '../../config';
 import { Dispatch } from 'redux';
 import { getResponse } from '../../utils/http';
@@ -39,7 +39,7 @@ export interface FilterIndexAction {
 
 // action creators
 // load actions
-export const loadIndex = () => {
+export const loadIndex: () => ThunkResult<void> = () => {
   return (dispatch: Dispatch, getState: () => IState) => {
     const state = getState();
     const filterBy = getSearchText(state);
@@ -70,9 +70,9 @@ export function loadIndexFailure(error: string): LoadIndexAction {
 }
 
 // filter actions
-export function applyFilter(filterBy: string) {
-  return (dispatch: Dispatch, getState: () => IState) => {
+export function applyFilter(filterBy: string): ThunkResult<void> {
+  return (dispatch: ThunkDispatch) => {
     dispatch({ type: 'FILTER_INDEX', filterBy });
-    loadIndex()(dispatch, getState);
+    dispatch(loadIndex());
   };
 }
