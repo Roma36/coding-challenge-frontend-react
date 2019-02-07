@@ -81,6 +81,7 @@ export function loadIndexFailure(error: string): LoadIndexAction {
 export function applyFilter(filterBy: string): ThunkResult<void> {
   return (dispatch: ThunkDispatch) => {
     dispatch({ type: 'FILTER_INDEX', filterBy });
+    dispatch(paginate(1));
     dispatch(loadIndex());
   };
 }

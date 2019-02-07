@@ -77,7 +77,7 @@ class Index extends Component<IndexProps> {
             reportDate={new Date(incident.updated_at)}
           />
         ))}
-        {Boolean(totalCount) && (
+        {Boolean(totalCount) && totalCount > ITEMS_PER_PAGE && (
           <Pagination
             currentPage={page}
             perPage={ITEMS_PER_PAGE}
