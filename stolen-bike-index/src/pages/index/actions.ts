@@ -1,4 +1,5 @@
-import { getSearchText } from './selectors';
+import { ITEMS_PER_PAGE } from './constants';
+import { getSearchText, getCurrentPage } from './selectors';
 import { IState, ThunkResult, ThunkDispatch } from './../rootReducer';
 import config from '../../config';
 import { Dispatch } from 'redux';
@@ -37,12 +38,19 @@ export interface FilterIndexAction {
   filterBy: string;
 }
 
+export interface PaginateAction {
+  type: 'PAGINATE';
+  page: number;
+}
+
 // action creators
 // load actions
 export const loadIndex: () => ThunkResult<void> = () => {
   return (dispatch: Dispatch, getState: () => IState) => {
     const state = getState();
     const filterBy = getSearchText(state);
+    const page = getCurrentPage(state);
+
     dispatch(loadIndexRequest());
 
     fetch(`${config.api}/incidents?proximity=berlin&query=${filterBy}`)
@@ -75,4 +83,9 @@ export function applyFilter(filterBy: string): ThunkResult<void> {
     dispatch({ type: 'FILTER_INDEX', filterBy });
     dispatch(loadIndex());
   };
+}
+
+// pagination actions
+export function paginate(page: number) {
+  return { type: 'PAGINATE', page };
 }

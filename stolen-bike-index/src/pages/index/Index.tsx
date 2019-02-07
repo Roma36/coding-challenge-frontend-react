@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/SearchBar';
 import { connect } from 'react-redux';
-import { loadIndex, IncidentData, applyFilter } from './actions';
+import { loadIndex, IncidentData, applyFilter, paginate } from './actions';
 import styled from 'styled-components';
-import { getIncidents, getTotalCount, getLoading, getError, getSearchText } from './selectors';
+import { getVisibleIncidents, getTotalCount, getLoading, getError, getSearchText, getCurrentPage } from './selectors';
 import { IState } from '../rootReducer';
 import IncidentItem from '../../components/IncidentItem';
 import Error from '../../components/Error';
+import { ITEMS_PER_PAGE } from './constants';
+import Pagination from '../../components/Pagination';
 
 const TotalCount = styled.div`
   text-align: right;
@@ -20,11 +22,13 @@ const Search = styled(SearchBar)`
 interface IndexProps {
   loadIndex: () => void;
   applyFilter: (title: string) => void;
+  paginate: (page: number) => void;
   totalCount: number;
   incidents: IncidentData[];
   isLoading: boolean;
   error: string;
   searchText: string;
+  page: number;
 }
 
 class Index extends Component<IndexProps> {
@@ -38,8 +42,12 @@ class Index extends Component<IndexProps> {
     this.props.applyFilter(str);
   };
 
+  private handlePaginate = (page: number) => {
+    this.props.paginate(page);
+  };
+
   render() {
-    const { totalCount, incidents, isLoading, error, searchText } = this.props;
+    const { page, totalCount, incidents, isLoading, error, searchText } = this.props;
     return (
       <React.Fragment>
         <Search
@@ -69,6 +77,14 @@ class Index extends Component<IndexProps> {
             reportDate={new Date(incident.updated_at)}
           />
         ))}
+        {Boolean(totalCount) && (
+          <Pagination
+            currentPage={page}
+            perPage={ITEMS_PER_PAGE}
+            totalCount={totalCount}
+            onPaginate={this.handlePaginate}
+          />
+        )}
       </React.Fragment>
     );
   }
@@ -77,10 +93,11 @@ class Index extends Component<IndexProps> {
 export default connect(
   (state: IState) => ({
     isLoading: getLoading(state),
-    incidents: getIncidents(state),
+    incidents: getVisibleIncidents(state),
     totalCount: getTotalCount(state),
     error: getError(state),
     searchText: getSearchText(state),
+    page: getCurrentPage(state),
   }),
-  { loadIndex, applyFilter }
+  { loadIndex, applyFilter, paginate }
 )(Index);
