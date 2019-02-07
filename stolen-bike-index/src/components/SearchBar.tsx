@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from './Button';
 
 interface SearchBarProps {
   onSearch: (str: string) => void;
@@ -24,16 +25,8 @@ const Input = styled.input`
   padding-left: 5px;
 `;
 
-const SearchButton = styled.button`
-  height: 44px;
-  width: 100px;
-  border: 1px solid #000;
+const SearchButton = styled(Button)`
   margin-left: 15px;
-  box-shadow: 2px 2px;
-
-  &:active {
-    box-shadow: 0 0;
-  }
 `;
 
 function SearchBar({ onSearch, disabled = false, placeholder = '', searchValue = '', className }: SearchBarProps) {
