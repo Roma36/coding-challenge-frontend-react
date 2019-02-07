@@ -1,3 +1,5 @@
+import { getSearchText } from './selectors';
+import { IState } from './../rootReducer';
 import config from '../../config';
 import { Dispatch } from 'redux';
 import { getResponse } from '../../utils/http';
@@ -38,10 +40,12 @@ export interface FilterIndexAction {
 // action creators
 // load actions
 export const loadIndex = () => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch, getState: () => IState) => {
+    const state = getState();
+    const filterBy = getSearchText(state);
     dispatch(loadIndexRequest());
 
-    fetch(`${config.api}/incidents?proximity=berlin`)
+    fetch(`${config.api}/incidents?proximity=berlin&query=${filterBy}`)
       .then(getResponse)
       .then(res => res.incidents || [])
       .then((incidents: IncidentData[]) => {
@@ -66,6 +70,9 @@ export function loadIndexFailure(error: string): LoadIndexAction {
 }
 
 // filter actions
-export function filterIndex(filterBy: string): FilterIndexAction {
-  return { type: 'FILTER_INDEX', filterBy };
+export function applyFilter(filterBy: string) {
+  return (dispatch: Dispatch, getState: () => IState) => {
+    dispatch({ type: 'FILTER_INDEX', filterBy });
+    loadIndex()(dispatch, getState);
+  };
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/SearchBar';
 import { connect } from 'react-redux';
-import { loadIndex, IncidentData, filterIndex } from './actions';
+import { loadIndex, IncidentData, applyFilter } from './actions';
 import styled from 'styled-components';
-import { getIncidents, getTotalCount, getLoading, getError } from './selectors';
+import { getIncidents, getTotalCount, getLoading, getError, getSearchText } from './selectors';
 import { IState } from '../rootReducer';
 import IncidentItem from '../../components/IncidentItem';
 import Error from '../../components/Error';
@@ -19,27 +19,35 @@ const Search = styled(SearchBar)`
 
 interface IndexProps {
   loadIndex: () => void;
-  filterIndex: (title: string) => void;
+  applyFilter: (title: string) => void;
   totalCount: number;
   incidents: IncidentData[];
   isLoading: boolean;
   error: string;
+  searchText: string;
 }
 
 class Index extends Component<IndexProps> {
   componentDidMount() {
-    this.props.loadIndex();
+    if (!this.props.incidents.length) {
+      this.props.loadIndex();
+    }
   }
 
   private searchIncidents = (str: string) => {
-    this.props.filterIndex(str);
+    this.props.applyFilter(str);
   };
 
   render() {
-    const { totalCount, incidents, isLoading, error } = this.props;
+    const { totalCount, incidents, isLoading, error, searchText } = this.props;
     return (
       <React.Fragment>
-        <Search onSearch={this.searchIncidents} placeholder="Search case descriptions" />
+        <Search
+          disabled={isLoading}
+          searchValue={searchText}
+          onSearch={this.searchIncidents}
+          placeholder="Search case descriptions"
+        />
 
         {Boolean(totalCount) && <TotalCount>total: {totalCount}</TotalCount>}
 
@@ -72,6 +80,7 @@ export default connect(
     incidents: getIncidents(state),
     totalCount: getTotalCount(state),
     error: getError(state),
+    searchText: getSearchText(state),
   }),
-  { loadIndex, filterIndex }
+  { loadIndex, applyFilter }
 )(Index);

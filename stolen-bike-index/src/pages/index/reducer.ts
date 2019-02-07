@@ -17,7 +17,7 @@ const initialState: IndexState = {
 export function indexReducer(state = initialState, action: LoadIndexAction | FilterIndexAction): IndexState {
   switch (action.type) {
     case 'LOAD_INDEX_REQUEST':
-      return { ...state, isLoading: true, error: '' };
+      return { ...state, incidents: [], isLoading: true, error: '' };
     case 'LOAD_INDEX_SUCCESS':
       return { ...state, isLoading: false, incidents: action.incidents || [] };
     case 'LOAD_INDEX_FAILURE':

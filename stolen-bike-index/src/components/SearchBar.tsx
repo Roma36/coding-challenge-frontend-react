@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 interface SearchBarProps {
   onSearch: (str: string) => void;
+  disabled?: boolean;
+  searchValue?: string;
   placeholder?: string;
   className?: string;
 }
@@ -34,21 +36,33 @@ const SearchButton = styled.button`
   }
 `;
 
-function SearchBar({ onSearch, placeholder = '', className }: SearchBarProps) {
+function SearchBar({ onSearch, disabled = false, placeholder = '', searchValue = '', className }: SearchBarProps) {
   // just wanted to try hooks so much :)
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(searchValue);
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      onSearch(inputValue);
+      initiateSearch();
     }
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value);
-  const handleButtonClick = () => onSearch(inputValue);
+  const handleButtonClick = () => initiateSearch();
+
+  const initiateSearch = () => {
+    if (!disabled) {
+      onSearch(inputValue);
+    }
+  };
 
   return (
     <SearchBarWrapper className={className}>
-      <Input placeholder={placeholder} onChange={handleInputChange} onKeyUp={handleKeyUp} />
+      <Input
+        disabled={disabled}
+        value={inputValue}
+        placeholder={placeholder}
+        onChange={handleInputChange}
+        onKeyUp={handleKeyUp}
+      />
       <SearchButton onClick={handleButtonClick}>Find cases</SearchButton>
     </SearchBarWrapper>
   );
