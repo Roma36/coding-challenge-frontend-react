@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Truncate from 'react-truncate';
+import config from '../config';
 
 interface IncidentItemProps {
   link: string;
@@ -54,7 +55,7 @@ function IncidentItem({ imageUrl, title, link, description, theftDate, reportDat
 
   return (
     <ItemWrapper>
-      <Picture alt="bike picture" src={imageUrl || 'favicon.ico'} />
+      <Picture alt="bike picture" src={imageUrl || config.publicUrl + '/favicon.ico'} />
       <InfoWrapper>
         <Link to={link}>{title}</Link>
         <Description>

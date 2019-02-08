@@ -1,4 +1,3 @@
-import { ITEMS_PER_PAGE } from './constants';
 import { getSearchText, getCurrentPage } from './selectors';
 import { IState, ThunkResult, ThunkDispatch } from './../rootReducer';
 import config from '../../config';
@@ -53,7 +52,7 @@ export const loadIndex: () => ThunkResult<void> = () => {
 
     dispatch(loadIndexRequest());
 
-    fetch(`${config.api}/incidents?proximity=berlin&query=${filterBy}`)
+    fetch(`${config.api}incidents?proximity=berlin&incident_type=theft&query=${filterBy}`)
       .then(getResponse)
       .then(res => res.incidents || [])
       .then((incidents: IncidentData[]) => {
