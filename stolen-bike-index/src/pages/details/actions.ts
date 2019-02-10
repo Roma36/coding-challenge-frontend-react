@@ -9,6 +9,10 @@ export type LoadDetailsAction =
   | { type: 'LOAD_DETAILS_SUCCESS'; incident: IncidentData }
   | { type: 'LOAD_DETAILS_FAILURE'; error: string };
 
+export interface ResetDetailsAction {
+  type: 'RESET_DETAILS';
+}
+
 // action creators
 // load actions
 export const loadTheftDetails: (id: number) => ThunkResult<void> = (id: number) => {
@@ -37,4 +41,8 @@ export function loadTheftSuccess(incident: IncidentData): LoadDetailsAction {
 
 export function loadTheftFailure(error: string): LoadDetailsAction {
   return { type: 'LOAD_DETAILS_FAILURE', error };
+}
+
+export function resetDetails(): ResetDetailsAction {
+  return { type: 'RESET_DETAILS' };
 }

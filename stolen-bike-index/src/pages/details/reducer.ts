@@ -1,4 +1,4 @@
-import { LoadDetailsAction } from './actions';
+import { LoadDetailsAction, ResetDetailsAction } from './actions';
 import { IncidentData } from '../index/actions';
 
 export interface DetailsState {
@@ -13,7 +13,7 @@ const initialState: DetailsState = {
   error: '',
 };
 
-export function indexReducer(state = initialState, action: LoadDetailsAction): DetailsState {
+export function indexReducer(state = initialState, action: LoadDetailsAction | ResetDetailsAction): DetailsState {
   switch (action.type) {
     case 'LOAD_DETAILS_REQUEST':
       return { ...state, incident: null, isLoading: true, error: '' };
@@ -21,6 +21,8 @@ export function indexReducer(state = initialState, action: LoadDetailsAction): D
       return { ...state, isLoading: false, incident: action.incident };
     case 'LOAD_DETAILS_FAILURE':
       return { ...state, isLoading: false, error: action.error };
+    case 'RESET_DETAILS':
+      return initialState;
     default:
       return state;
   }

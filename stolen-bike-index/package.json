@@ -5,6 +5,7 @@
   "homepage": "https://roma36.github.io/coding-challenge-frontend-react",
   "dependencies": {
     "@types/jest": "23.3.13",
+    "@types/mapbox-gl": "^0.51.4",
     "@types/node": "10.12.21",
     "@types/react": "16.8.1",
     "@types/react-dom": "16.0.11",
@@ -12,6 +13,7 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/react-truncate": "^2.3.3",
     "@types/styled-components": "^4.1.8",
+    "mapbox-gl": "^0.53.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-redux": "^6.0.0",
