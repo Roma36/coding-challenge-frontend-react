@@ -6,9 +6,9 @@ import styled from 'styled-components';
 import { getVisibleIncidents, getTotalCount, getLoading, getError, getSearchText, getCurrentPage } from './selectors';
 import { IState } from '../rootReducer';
 import IncidentItem from '../../components/IncidentItem';
-import Error from '../../components/Error';
 import { ITEMS_PER_PAGE } from './constants';
 import Pagination from '../../components/Pagination';
+import ProcessingInfo from '../../components/ProcessingInfo';
 
 const TotalCount = styled.div`
   text-align: right;
@@ -59,11 +59,7 @@ class Index extends Component<IndexProps> {
 
         {Boolean(totalCount) && <TotalCount>total: {totalCount}</TotalCount>}
 
-        {isLoading && 'Loading...'}
-
-        {!error && !isLoading && incidents.length === 0 && 'No Results'}
-
-        {Boolean(error) && <Error>{'Ooops, something went wrong'}</Error>}
+        <ProcessingInfo isLoading={isLoading} error={error} isEmptyData={incidents.length === 0} />
 
         {incidents.map(incident => (
           <IncidentItem

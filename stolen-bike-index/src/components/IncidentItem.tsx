@@ -42,7 +42,6 @@ const Description = styled.div`
 `;
 
 const AdditionalInfo = styled.div`
-  display: flex;
   margin-bottom: 30px;
 `;
 
@@ -65,7 +64,8 @@ function IncidentItem({ imageUrl, title, link, description, theftDate, reportDat
         </Description>
         <AdditionalInfo>
           <span>
-            {theftDate.toDateString()} - {location}
+            {theftDate.toDateString()}
+            {Boolean(location) && ` - ${location}`}
           </span>
         </AdditionalInfo>
         <UpdatedDate>

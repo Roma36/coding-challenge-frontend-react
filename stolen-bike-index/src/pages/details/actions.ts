@@ -1,4 +1,4 @@
-import { IState, ThunkResult, ThunkDispatch } from './../rootReducer';
+import { ThunkResult } from './../rootReducer';
 import config from '../../config';
 import { Dispatch } from 'redux';
 import { getResponse } from '../../utils/http';
