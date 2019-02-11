@@ -14,12 +14,12 @@ interface PageButtonProps {
   selected: boolean;
 }
 
-const PageNumberButton = styled(Button)`
+export const PageNumberButton = styled(Button)`
   ${(props: PageButtonProps) => (props.selected ? `box-shadow: 0 0;` : '')}
   width: 50px;
 `;
 
-const PaginationButton = styled(Button)`
+export const PaginationButton = styled(Button)`
   width: 120px;
 `;
 
@@ -31,7 +31,11 @@ interface PaginationProps {
 }
 
 export default function Pagination({ currentPage, perPage, totalCount, onPaginate }: PaginationProps) {
-  const numberOfPages = Math.floor(totalCount / perPage) + 1;
+  const numberOfPages = Math.ceil(totalCount / perPage);
+
+  if (numberOfPages <= 1) {
+    return null;
+  }
 
   const handlePaginate = (page: number) => {
     if (page !== currentPage) {
@@ -39,8 +43,16 @@ export default function Pagination({ currentPage, perPage, totalCount, onPaginat
     }
   };
 
-  const handleFirstPage = () => onPaginate(1);
-  const handleLastPage = () => onPaginate(numberOfPages);
+  const handleFirstPage = () => {
+    if (currentPage !== 1) {
+      onPaginate(1);
+    }
+  };
+  const handleLastPage = () => {
+    if (currentPage !== numberOfPages) {
+      onPaginate(numberOfPages);
+    }
+  };
   const handlePrevPage = () => {
     const prevPage = currentPage - 1;
     if (prevPage >= 1) {

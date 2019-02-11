@@ -41,7 +41,7 @@ const ContentWrapper = styled.div`
   padding: 2% 15% 2% 2%;
 `;
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
