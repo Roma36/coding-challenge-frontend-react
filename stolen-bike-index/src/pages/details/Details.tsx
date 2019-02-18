@@ -1,36 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { match } from 'react-router';
 import { loadTheftDetails, resetDetails } from './actions';
 import { IState } from '../rootReducer';
 import { getDetails, getLoading, getError } from './selectors';
-import { IncidentData } from '../index/actions';
 import ProcessingInfo from '../../components/ProcessingInfo';
-import styled from 'styled-components';
 import Map from '../../components/Map';
+import { Title, Stolen, Updated } from './components';
+import { DetailsProps } from './model';
 
-interface DetailsProps {
-  loadTheftDetails: (id: number) => void;
-  resetDetails: () => void;
-  details: IncidentData | null;
-  match: match<{ id: string }>;
-  isLoading: boolean;
-  error: string;
-}
-
-const Title = styled.h2`
-  margin-top: 0;
-`;
-
-const Stolen = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Updated = styled.div`
-  text-align: right;
-`;
-
-class Details extends Component<DetailsProps> {
+export class Details extends Component<DetailsProps> {
   componentDidMount() {
     this.props.loadTheftDetails(Number(this.props.match.params.id));
   }

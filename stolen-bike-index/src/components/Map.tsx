@@ -1,8 +1,9 @@
 import React, { Component, Ref } from 'react';
 import styled from 'styled-components';
 import mapboxgl, { GeoJSONSource } from 'mapbox-gl';
+import config from '../config';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoicm9tYW4tZyIsImEiOiJjanJ5dGI3dDIxMXB0NDRxeXlyaTFvbndoIn0.iM0e2kuvqM0ysHm6sXIjpg';
+mapboxgl.accessToken = config.mapBoxToken;
 
 const MapContainer = styled.div`
   height: 350px;

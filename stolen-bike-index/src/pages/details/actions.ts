@@ -1,17 +1,9 @@
+import { IncidentData } from './../index/model';
+import { LoadDetailsAction, ResetDetailsAction } from './model';
 import { ThunkResult } from './../rootReducer';
 import config from '../../config';
 import { Dispatch } from 'redux';
 import { getResponse } from '../../utils/http';
-import { IncidentData } from '../index/actions';
-
-export type LoadDetailsAction =
-  | { type: 'LOAD_DETAILS_REQUEST' }
-  | { type: 'LOAD_DETAILS_SUCCESS'; incident: IncidentData }
-  | { type: 'LOAD_DETAILS_FAILURE'; error: string };
-
-export interface ResetDetailsAction {
-  type: 'RESET_DETAILS';
-}
 
 // action creators
 // load actions

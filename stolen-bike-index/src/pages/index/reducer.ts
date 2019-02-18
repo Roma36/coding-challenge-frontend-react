@@ -1,14 +1,6 @@
-import { LoadIndexAction, IncidentData, FilterIndexAction, PaginateAction } from './actions';
+import { IndexState, LoadIndexAction, FilterIndexAction, PaginateAction } from './model';
 
-export interface IndexState {
-  incidents: IncidentData[];
-  isLoading: boolean;
-  error: string;
-  filterBy: string;
-  page: number;
-}
-
-const initialState: IndexState = {
+export const initialState: IndexState = {
   incidents: [],
   isLoading: false,
   error: '',

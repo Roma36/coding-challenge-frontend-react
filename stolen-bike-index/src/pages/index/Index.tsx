@@ -1,37 +1,16 @@
 import React, { Component } from 'react';
-import SearchBar from '../../components/SearchBar';
 import { connect } from 'react-redux';
-import { loadIndex, IncidentData, applyFilter, paginate } from './actions';
-import styled from 'styled-components';
+import { loadIndex, applyFilter, paginate } from './actions';
 import { getVisibleIncidents, getTotalCount, getLoading, getError, getSearchText, getCurrentPage } from './selectors';
 import { IState } from '../rootReducer';
 import IncidentItem from '../../components/IncidentItem';
 import { ITEMS_PER_PAGE } from './constants';
 import Pagination from '../../components/Pagination';
 import ProcessingInfo from '../../components/ProcessingInfo';
+import { IndexProps } from './model';
+import { Search, TotalCount } from './components';
 
-const TotalCount = styled.div`
-  text-align: right;
-  margin-bottom: 20px;
-`;
-
-const Search = styled(SearchBar)`
-  margin-bottom: 20px;
-`;
-
-interface IndexProps {
-  loadIndex: () => void;
-  applyFilter: (title: string) => void;
-  paginate: (page: number) => void;
-  totalCount: number;
-  incidents: IncidentData[];
-  isLoading: boolean;
-  error: string;
-  searchText: string;
-  page: number;
-}
-
-class Index extends Component<IndexProps> {
+export class Index extends Component<IndexProps> {
   componentDidMount() {
     if (!this.props.incidents.length) {
       this.props.loadIndex();
@@ -57,18 +36,18 @@ class Index extends Component<IndexProps> {
           placeholder="Search case descriptions"
         />
 
-        {Boolean(totalCount) && <TotalCount>total: {totalCount}</TotalCount>}
+        {!isLoading && Boolean(totalCount) && <TotalCount>total: {totalCount}</TotalCount>}
 
         <ProcessingInfo isLoading={isLoading} error={error} isEmptyData={incidents.length === 0} />
 
         {incidents.map(incident => (
           <IncidentItem
             key={incident.id}
-            imageUrl={incident.media.image_url_thumb}
+            imageUrl={incident.media.image_url_thumb || ''}
             title={incident.title}
             link={`/case/${incident.id}`}
             location={incident.address}
-            description={incident.description}
+            description={incident.description || ''}
             theftDate={new Date(incident.occurred_at)}
             reportDate={new Date(incident.updated_at)}
           />

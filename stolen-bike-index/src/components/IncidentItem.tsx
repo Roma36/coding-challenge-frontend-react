@@ -50,8 +50,6 @@ const UpdatedDate = styled.div`
 `;
 
 function IncidentItem({ imageUrl, title, link, description, theftDate, reportDate, location }: IncidentItemProps) {
-  const descriptionMaxLength = 450; // number of characters
-
   return (
     <ItemWrapper>
       <Picture alt="bike picture" src={imageUrl || config.publicUrl + '/favicon.ico'} />

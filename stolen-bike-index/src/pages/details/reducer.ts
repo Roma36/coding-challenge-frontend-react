@@ -1,11 +1,4 @@
-import { LoadDetailsAction, ResetDetailsAction } from './actions';
-import { IncidentData } from '../index/actions';
-
-export interface DetailsState {
-  incident: IncidentData | null;
-  isLoading: boolean;
-  error: string;
-}
+import { DetailsState, LoadDetailsAction, ResetDetailsAction } from './model';
 
 const initialState: DetailsState = {
   incident: null,

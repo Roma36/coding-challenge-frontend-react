@@ -6,3 +6,5 @@ configure({ adapter: new Adapter() });
 jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   Map: () => ({}),
 }));
+
+HTMLCanvasElement.prototype.getContext = () => null;
