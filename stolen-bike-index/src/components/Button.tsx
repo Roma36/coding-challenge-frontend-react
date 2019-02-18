@@ -5,6 +5,7 @@ export default styled.button`
   width: 100px;
   border: 1px solid #000;
   box-shadow: 2px 2px;
+  background: #fff;
 
   &:active {
     box-shadow: 0 0;
